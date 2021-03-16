@@ -4,5 +4,8 @@
 /docs/.vuepress/theme/
 /node_modules
 /.vscode
+/.vscode
+/deploy.sh
+/theme-deploy.sh
 
 
