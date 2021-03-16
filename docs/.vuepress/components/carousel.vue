@@ -1,16 +1,16 @@
 <template>
   <div class="carousels">
     <div
-      class="zp-carousel pr"
+      class="z-carousel pr"
       :style="windowWidth"
       @mouseover="stopTimedLoop"
       @mouseleave="restartTimedLoop"
     >
       <button class="left-btn pa" @click="move(singleItemWidth, 1,speed)">《</button>
       <button class="right-btn pa" @click="move(singleItemWidth, -1,speed)">》</button>
-      <div class="zp-carousel-box" ref="zpCarousel" :style="containerStyle">
+      <div class="z-carousel-box" ref="zpCarousel" :style="containerStyle">
         <div
-          class="zp-carousel-item"
+          class="z-carousel-item"
           :class="{'carousel-item-active':isActiveLeft(index)}"
           :style="[itemStyle]"
           v-for="(item,index) in dataEndThreeArr"
@@ -19,7 +19,7 @@
         >{{item}}</div>
 
         <div
-          class="zp-carousel-item"
+          class="z-carousel-item"
           :class="{'carousel-item-active':currentIndex==index+1}"
           :style="[itemStyle]"
           v-for="(item,index) in imgArr"
@@ -27,7 +27,7 @@
           :data-index="index+1"
         >{{item}}</div>
         <div
-          class="zp-carousel-item"
+          class="z-carousel-item"
           :class="{'carousel-item-active':
           (currentIndex==(index+1))}"
           :style="[itemStyle]"
@@ -140,7 +140,6 @@ export default {
         : (this.currentIndex -= offset / this.singleItemWidth);
       if (this.currentIndex > this.imgArr.length) this.currentIndex = 1;
       if (this.currentIndex < 1) this.currentIndex = this.imgArr.length;
-      console.log(this.currentIndex);
       // this.distance += offset * direction;
       // if (this.distance < -1500) this.distance = -300;//大于第五张时回到第一张
       // if (this.distance > -300) this.distance = -1500;//滑动距离小于显示第一张时显示最后一张
@@ -202,7 +201,6 @@ export default {
     },
     //点击圆点跳转
     jumpDot: function(index) {
-      console.log(index);
       const diff = index - this.currentIndex;
       // if (diff == 0) return;
       const direction = diff > 0 ? -1 : 1;
@@ -227,7 +225,7 @@ export default {
   width: 100%;
   height: 200px;
 
-  .zp-carousel {
+  .z-carousel {
     height: inherit;
     overflow: hidden;
     margin: 0 auto;
@@ -245,7 +243,7 @@ export default {
       z-index: 1;
     }
 
-    .zp-carousel-box {
+    .z-carousel-box {
       height: 90%;
       background: #ccc;
       overflow: hidden;
@@ -253,7 +251,7 @@ export default {
       display: flex;
 
       // transition: all 1s;
-      .zp-carousel-item {
+      .z-carousel-item {
         height: 100%;
         // width       : 300px;
         background: #afa5a5;
@@ -261,9 +259,6 @@ export default {
         align-items: center;
         justify-content: center;
         text-align: center;
-        // transform   : scale(0.8)
-        // position    : absolute;
-        // background  : url("./img/中间.png");
         transition: all 0.8s;
       }
 
