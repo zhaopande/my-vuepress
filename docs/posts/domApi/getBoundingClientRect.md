@@ -1,7 +1,7 @@
 ---
 sidebar: false
 date: "2019-8-6"
-tag: domapi
+tag: webapi
 title: getBoundingClientRect
 category: 
 - frontEnd
