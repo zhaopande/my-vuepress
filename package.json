@@ -6,8 +6,8 @@
   "scripts": {
     "start": "vuepress dev docs",
     "build": "vuepress build docs",
-    "deploy": "bash deploy.sh",
-    "theme": "bash theme-deploy.sh"
+    "deploy-prod": "bash deploy.sh",
+    "deploy-theme": "bash theme-deploy.sh"
   },
   "author": "",
   "license": "ISC",
