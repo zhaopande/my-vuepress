@@ -1,56 +1,51 @@
 ---
 sidebar: false
 date: "2021-4-6"
-tag: javascript 
+tag: polyfill 
 category: 
-- frontEnd
-title: call、apply、bind手动实现
+ - frontEnd
+title: 手撕api-call、apply、bind
 ---
-
 
 ## call
 
 ```js
-
 //传递参数从一个数组变成逐个传参了,不用...扩展运算符的也可以用arguments代替
-Function.prototype.MyCall = function (fn, ...args) {
-  console.log(this);
-  //这里默认不传就是给window
-  const context = fn || window;
-  //给context新增一个独一无二的属性以免覆盖原有属性
-  const key = Symbol();
-  // 绑定函数
-  context[key] = this;
-  // 通过隐式绑定的方式调用函数
-  const res = context[key](...args);
-  console.log("res:", res);
-  // 删除属性
-  delete context[key];
-  // 返回函数调用的结果
-  return res;
+Function.prototype.MyCall = function(fn, ...args) {
+    console.log(this);
+    //这里默认不传就是给window
+    const context = fn || window;
+    //给context新增一个独一无二的属性以免覆盖原有属性
+    const key = Symbol();
+    // 绑定函数
+    context[key] = this;
+    // 通过隐式绑定的方式调用函数
+    const res = context[key](...args);
+    console.log("res:", res);
+    // 删除属性
+    delete context[key];
+    // 返回函数调用的结果
+    return res;
 };
 
 function Product(name, price) {
-  this.name = name;
-  this.price = price;
+    this.name = name;
+    this.price = price;
 }
 
 function Food(name, price) {
-  Product.MyCall(this, name, price);
-  this.category = "food";
+    Product.MyCall(this, name, price);
+    this.category = "food";
 }
 const newFood = new Food("cheese", 5);
 console.log(newFood); //Food { name: 'cheese', price: 5, category: 'food' }
 console.log(newFood instanceof Product);
 
 const arr1 = [1, 2, 3],
-  arr2 = [3, 4, 5];
+    arr2 = [3, 4, 5];
 arr1.push.MyCall(arr2, ...arr1);
 console.log(arr1, arr2); //[ 1, 2, 3 ] [ 3, 4, 5, 1, 2, 3 ]
-
 ```
-
-
 
 ## apply
 
@@ -59,25 +54,22 @@ console.log(arr1, arr2); //[ 1, 2, 3 ] [ 3, 4, 5, 1, 2, 3 ]
  * @arg Array|ArrayLike call传入的是多个参数apply是一个参数
  */
 Function.prototype.myApply = function (fn, arg) {
-  const context = fn || window;
-  const key = Symbol();
-  context[key] = this;
-  const res = context[key](...arg);
-  delete context[key];
-  return res;
-};
+  const context = fn || window; 
+  const key = Symbol(); 
+  context[key] = this; 
+  const res = context[key](...arg); 
+  delete context[key]; 
+  return res; 
+}; 
 
-const arr1 = [1, 2, 3],
-  arr2 = [3, 4, 5];
-arr1.push.myApply(arr2, arr1);
+const arr1 = [1, 2, 3], 
+  arr2 = [3, 4, 5]; 
+arr1.push.myApply(arr2, arr1); 
 console.log(arr1, arr2); //[ 1, 2, 3 ] [ 3, 4, 5, 1, 2, 3 ]
-
 
 ```
 
-
 ## bind
-
 
 ``` js
 /**
@@ -140,6 +132,5 @@ const t1 = new Test({ a: "aaa" });
 const f1 = t1.f1;
 const f2 = t1.f2;
 console.log(f1());
-
 
 ```
