@@ -12,6 +12,6 @@ noTitle: true
 
 #### 前端仔
 
-欢迎wx骚扰: pan9625
+wx: pan9625
 
 github: <https://github.com/zhaopan-pan>
